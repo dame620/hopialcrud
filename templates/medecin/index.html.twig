@@ -1,0 +1,74 @@
+ {% extends 'base.html.twig' %}
+
+{% block title %}Hello MedecinController!{% endblock %}
+
+{% block content %}
+
+
+        <table class="table">
+            <thead>
+                <tr>
+                    
+                    <th>Id</th>
+                    <th>PRENOM</th>
+                    <th>NOM</th>
+                    <th>MATRICULE</th>
+                    <th>DATENAISSANCE</th>
+                    <th>EMAIL</th>
+                    <th>telephone</th>
+                    <th>LIBELLE SERVICE</th>
+                    
+                    
+                </tr>
+            </thead>
+            <tbody>
+                
+                {% for medecin in medecins %}
+                <tr>
+                    <td scope="row">{{ medecin.id }}</td>
+                    
+                    <td>
+                        {{ medecin.prenom }}
+                    </td>
+
+
+                    <td>
+                        {{ medecin.nom }}
+                    </td>
+
+                    <td>
+                        {{ medecin.matricule }}
+                    </td>
+
+                    <td>
+                        {{ medecin.datenaissance | date('d/m/Y') }}
+                    </td>
+
+
+                    <td>
+                        {{ medecin.email }}
+                    </td>
+
+                    <td>
+                        {{ medecin.telephone }}
+                    </td>
+                    <td>
+                        {{ medecin.service.libelle }}
+                    </td>
+                    <td>
+             
+               <a class="btn btn-success" href="{{ path('medecin.medecin.edit', {'id':medecin.id}) }}">modifier</a>
+             
+            <form method="post" action="{{ path('medecin.medecin.delete', {'id':medecin.id}) }}" style="display:inline-block"
+            onsubmit="return confirm('voulez-vous vraiment supprimer')">
+            <input type="hidden" name="_method" value="DELETE">
+            <input type="hidden" name="_token" value="{{csrf_token('delete' ~ medecin.id) }}">
+             <button class="btn btn-danger">supprimer</button>
+            </form>
+            </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        {% endblock %}

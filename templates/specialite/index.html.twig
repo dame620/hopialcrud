@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello SpecialiteController!{% endblock %}
+
+
+{% block content %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Libellé specialité</th>
+                    <th>libellé service</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                {% for specialite in specialites %}
+                <tr>
+                    <td scope="row">{{ specialite.id }}</td>
+                    <td>
+                        {{ specialite.libelle }}
+                    </td>
+                    <td>
+                        {{ specialite.service.libelle }}
+                    </td>
+                    <td>
+                      
+               <a class="btn btn-success" href="{{ path('specialite.specialite.edit', {'id':specialite.id}) }}">modifier</a>
+             
+               <form method="post" action="{{ path('specialite.specialite.delete', {'id':specialite.id}) }}" style="display:inline-block"
+               onsubmit="return confirm('voulez-vous vraiment supprimer')">
+               <input type="hidden" name="_method" value="DELETE">
+               <input type="hidden" name="_token" value="{{csrf_token('delete' ~ specialite.id) }}">
+                <button class="btn btn-danger">supprimer</button>
+               </form>  
+                     </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        {% endblock %}
+

@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+{% block title %}Hello AdminController!{% endblock %}
+
+{% block content %}
+
+<h4>Creation d'un service !</h4>
+
+{{ form_start(form) }}
+
+
+{{ form_widget(form)}}
+
+
+{{ form_end(form) }}
+
+
+
+{% endblock %}
